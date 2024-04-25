@@ -8,7 +8,7 @@ if os.path.isfile('env.py'):
 
     
 
-development = os.environ.get("DEVELOPMENT", False)
+# development = os.environ.get("DEVELOPMENT", True)
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-p58cboy61=zdty7b$n0&skw+nv4m&dk7vp2mwf8*_ms%lc0mu&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = development
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '.herokuapp.com',
@@ -76,37 +76,37 @@ WSGI_APPLICATION = 'codestar.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-if development:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-else:
-    # PostgreSQL database setup
-    DATABASES = {
-    'default':dj_database_url.parse(os.environ.get("DATABASE_URL"))
+# if development:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': BASE_DIR / 'db.sqlite3',
+#         }
+#     }
+# else:
+#     # PostgreSQL database setup
+#     DATABASES = {
+#     'default':dj_database_url.parse(os.environ.get("DATABASE_URL"))
+# }
+
+
+
+
+DATABASES = {
+   'default':dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
 
 # DATABASES = {
-#          'default': {
-#          'ENGINE': 'django.db.backends.sqlite3',
-#          'NAME': BASE_DIR / 'db.sqlite3',
-#          }
-# }
-# DATABASE_URL = os.getenv('DATABASE_URL')
-# DATABASES = {
-#     'default': dj_database_url.config(),
-#     'ENGINE': "django.db.backends.postgresql_psycopg2",
+#        'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#              'NAME': BASE_DIR / 'db.sqlite3',
+#        }
 # }
 
-
-# DATABASES = {
-#       'default': dj_database_url.config(),
-#       'ENGINE': "django.db.backends.postgresql_psycopg2",
-#       'NAME': 'postgres',
-# }
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.127.0.0.1",
+    "https://*.herokuapp.com"
+]
 
 
 
