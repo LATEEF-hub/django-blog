@@ -14,9 +14,11 @@ class Post(models.Model):
     class Meta:
         ordering = ['-created_on']
 
+
+
 class Comment(models.Model):
-    post = models.ForeignKey(Post, related_name='comment_posts', on_delete=models.CASCADE)
-    author = models.ForeignKey(User, related_name='comment_posts', on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
+    author = models.ForeignKey(User, related_name="comments", on_delete=models.CASCADE)
     body = models.TextField()
     approved = models.BooleanField(default=False)
     created_on = models.DateTimeField( auto_now_add=True)
